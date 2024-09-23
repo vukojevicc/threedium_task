@@ -1,0 +1,27 @@
+.configurator-options {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+
+    label {
+        text-transform: uppercase;
+        display: flex;
+        gap: 5px;
+        background-color: $light-background;
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 14px;
+
+        [type='radio'] {
+            accent-color: black;
+        }
+
+        &:has(:checked) {
+            border: 1px solid black;
+        }
+    }
+}

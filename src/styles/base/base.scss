@@ -2,14 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-body {
-    border: 1px solid red;
-    overflow: hidden;
-}
-
-#container3d_replace {
+@mixin width-height-adjusted {
     height: 100vh;
     width: 100vw;
+}
+
+html,
+body {
+    overflow: hidden;
+    @include width-height-adjusted;
+}
+
+#root {
+    @include width-height-adjusted;
 }

@@ -1,2 +1,10 @@
+// Utilities
+@import 'utilities/variables.scss';
+
 // Base
 @import 'base/base.scss';
+
+// Layout
+@import 'layout/main-tab.scss';
+@import 'layout/configurator-options.scss';
+@import 'layout/configurator-popup.scss';

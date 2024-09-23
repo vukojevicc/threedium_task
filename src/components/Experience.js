@@ -1,27 +1,42 @@
+import { useEffect, useState } from "react";
+import ConfiguratorElements from "./configurator/ConfiguratorElements";
+
 export default function Experience() {
 
-    // Configurator options
-    var options = { 
-        distID: 'latest', 
-        solution3DName: 'suitcase-color', 
-        projectName: 'resources-for-videos-and-marketing-purposes', 
-        solution3DID: '62766', containerID: 'container3d_replace'
-    
-        // onPointerClick: function (objectsClick) {
-        //     if (objectsClick.length > 0) {
-        //         if (objectsClick[0].type == "annotation") {
-        //             // 
-        //         }
-        //     }
-        // },
-    
-        // onCameraInteraction: function () {
-        //     //       
-        // },
-    };
-    
-    Unlimited3D.init(options);
-    // Configurator options
+    // State used to toggle between configurator and animations modes
+    const [configurator, setConfigurator] = useState(true)
 
-    return null
+    // Toggle annotations
+    useEffect(() => {
+        if (!configurator) {
+            Unlimited3D.showAnnotations({
+                annotationObjects: [
+                  {
+                    annotations: ['Open', 'Extend handle', 'Wheel spinner on']
+                  }
+                ]
+              });
+        }
+        else {
+            Unlimited3D.hideAnnotations({ annotations: ['Open', 'Extend handle', 'Wheel spinner on'] })
+        }
+    }, [configurator])
+
+    return (
+        <>
+            <div className="main-tab">
+                <button 
+                className={`${configurator ? 'active' : ''}`}
+                onClick={() => {setConfigurator(true)}}
+                >Configurator</button>
+
+                <button 
+                className={`${!configurator ? 'active' : ''}`}
+                onClick={() => {setConfigurator(false)}}
+                >Animations</button>
+            </div>
+
+            {configurator && <ConfiguratorElements/>}
+        </>
+    )
 }
