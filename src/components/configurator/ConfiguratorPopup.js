@@ -1,14 +1,16 @@
-import { useState } from "react";
-import BodyColorPart from "./colors-and-parts/BodyColorPart";
-import HandlesColorPart from "./colors-and-parts/HandlesColorPart";
+import { useEffect, useState } from "react"
+import BodyColorPart from "./colors-and-parts/BodyColorPart"
+import HandlesColorPart from "./colors-and-parts/HandlesColorPart"
+import CornersColorPart from './colors-and-parts/CornersColorPart'
+import WheelsColorPart from './colors-and-parts/WheelsColorPart'
 
 export default function ConfiguratorPopup({activeOption, setActiveOption}) {
 
-    // Unlimited3D.changeMaterial({ parts: ['Body_metal_base'], material: '04 CHROME SATIN CHERRY RED' })
+    // Unlimited3D.changeMaterial({ parts: ['Body_metal_base'], material: 'Chrome SATIN OLIVE GREEN' })
     // Unlimited3D.changeMaterial({ parts: ['Body_metal_cover'], material: '05 CHROME SATIN MIDNIGHT BLACK' })
 
     // Unlimited3D.getAvailableMaterials((error, result) => { console.log(error, result); })
-    Unlimited3D.getMaterial({ part: 'Body_metal_base' }, (error, result) => {console.log(error, result)})
+    // Unlimited3D.getMaterial({ part: 'Body_metal_base' }, (error, result) => {console.log(error, result)})
 
     // Get the color name
     const [colorName, setColorName] = useState(null)
@@ -37,6 +39,9 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
 
             return previousPartIndex + 1 
         })
+
+        // Reset color name
+        setColorName(null)
     }
 
     const previousPartHandler = () => {
@@ -48,7 +53,15 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
 
             return previousPartIndex - 1 
         })
+
+        // Reset color name
+        setColorName(null)
     }
+
+    // Reset part index when the active option is changed
+    useEffect(() => {
+        setPartIndex(0)
+    }, [activeOption])
     
     return (
         <>
@@ -61,7 +74,10 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
                         <div className="title">
                             {activeOption}    
                         </div>
-                        <div className="close-button" onClick={() => {setActiveOption('')}}>
+                        <div className="close-button" onClick={() => {
+                                setActiveOption('')
+                                Unlimited3D.activateModifier({ modifier: "default_camera_desktop" }) // set the camera to default
+                            }}>
                             <img src="./svgs/x-icon.svg" alt="close button"/>
                         </div>
                     </div>
@@ -73,8 +89,8 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
                     <div className="color">
                         {activeOption === 'body' && <BodyColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
                         {activeOption === 'handles' && <HandlesColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
-                        {/* {activeOption === 'corners' && <BodyColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
-                        {activeOption === 'wheels' && <BodyColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>} */}
+                        {activeOption === 'corners' && <CornersColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
+                        {activeOption === 'wheels' && <WheelsColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
                     </div>
                 </div>
                 <div className="arrows">

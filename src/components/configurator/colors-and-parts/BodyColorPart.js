@@ -47,9 +47,10 @@ export default function BodyColorPart({onColorChange, getAllParts, part}) {
         }
     ]
 
-    // Retrieve the initial part
+    // Retrieve the initial part and reset the color
     useEffect(() => {
         getAllParts(parts)
+        onColorChange(null)
     }, [])
 
     return (

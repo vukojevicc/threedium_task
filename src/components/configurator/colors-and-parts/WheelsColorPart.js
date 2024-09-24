@@ -38,16 +38,44 @@ export default function BodyColorPart({onColorChange, getAllParts, part}) {
 
     const parts = [
         {
-            partName: 'Handle_base1',
+            partName: 'Wheels_base',
             shortPartName: 'base'
         },
         {
-            partName: 'Handle_metal-1',
-            shortPartName: 'metal'
+            partName: 'Wheels_base_cover',
+            shortPartName: 'base cover'
         },
         {
-            partName: 'Handle_telescope-1',
-            shortPartName: 'telescope'
+            partName: 'Wheels_front_right_base',
+            shortPartName: 'front right base'
+        },
+        {
+            partName: 'Wheels_front_left_base',
+            shortPartName: 'front left base'
+        },
+        {
+            partName: 'Wheels_back_right_base',
+            shortPartName: 'back right base'
+        },
+        {
+            partName: 'Wheels_back_left_base',
+            shortPartName: 'back left base'
+        },
+        {
+            partName: 'Wheels_front_right_center',
+            shortPartName: 'front right center'
+        },
+        {
+            partName: 'Wheels_front_left_center',
+            shortPartName: 'front left center'
+        },
+        {
+            partName: 'Wheels_back_right_center',
+            shortPartName: 'back right center'
+        },
+        {
+            partName: 'Wheels_back_left_centar',
+            shortPartName: 'back left centar'
         }
     ]
 

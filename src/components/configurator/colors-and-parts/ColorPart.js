@@ -1,11 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function ColorPart({ colors, onColorChange, part }) {
 
     // Track the active color index to give it the active class
     const [activeIndex, setActiveIndex] = useState(null)
 
-    console.log(part)
+    // Remove active color outline on arrow click/part change
+    useEffect(() => {
+        setActiveIndex(null)
+    }, [part])
 
     return (
         <div className="color-options">
@@ -18,7 +21,7 @@ export default function ColorPart({ colors, onColorChange, part }) {
                     onClick={() => {
                         setActiveIndex(index)
                         onColorChange(color.shortColorName)
-                        Unlimited3D.changeMaterial({ parts: [`${part.partName}`], material: `${color.colorName}` })
+                        Unlimited3D.changeMaterial({ parts: [`${part.partName}`], material: `${color.colorName}` }) // Change the color
                     }}
                 >
                 </div>

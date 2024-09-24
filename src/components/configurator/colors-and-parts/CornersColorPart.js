@@ -38,16 +38,12 @@ export default function BodyColorPart({onColorChange, getAllParts, part}) {
 
     const parts = [
         {
-            partName: 'Handle_base1',
+            partName: 'Corners_base',
             shortPartName: 'base'
         },
         {
-            partName: 'Handle_metal-1',
-            shortPartName: 'metal'
-        },
-        {
-            partName: 'Handle_telescope-1',
-            shortPartName: 'telescope'
+            partName: 'Corners_cover',
+            shortPartName: 'cover'
         }
     ]
 
@@ -62,7 +58,7 @@ export default function BodyColorPart({onColorChange, getAllParts, part}) {
             <ColorPart 
                 colors={colors} 
                 onColorChange={onColorChange} 
-                part={part} 
+                part={part}
             />
         </>
     )
