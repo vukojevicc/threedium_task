@@ -15,11 +15,16 @@ export default function Experience() {
                     annotations: ['Open', 'Extend handle', 'Wheel spinner on']
                   }
                 ]
-              });
+              })
         }
         else {
-            Unlimited3D.hideAnnotations({ annotations: ['Open', 'Extend handle', 'Wheel spinner on'] })
+            Unlimited3D.hideAnnotations({ annotations: ['Open', 'Extend handle', 'Wheel spinner on', 'Close', 'Retract handle', 'Wheel spinner off'] })
+            Unlimited3D.activateModifier({ modifier: "retract_handle" })
+            Unlimited3D.activateModifier({ modifier: "wheel_spinner_off" })
+            Unlimited3D.activateModifier({ modifier: "close" })
         }
+
+        Unlimited3D.activateModifier({ modifier: "default_camera_desktop" }) // set the camera to default
     }, [configurator])
 
     return (
