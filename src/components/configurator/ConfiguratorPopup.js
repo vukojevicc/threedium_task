@@ -6,12 +6,6 @@ import WheelsColorPart from './colors-and-parts/WheelsColorPart'
 
 export default function ConfiguratorPopup({activeOption, setActiveOption}) {
 
-    // Unlimited3D.changeMaterial({ parts: ['Body_metal_base'], material: 'Chrome SATIN OLIVE GREEN' })
-    // Unlimited3D.changeMaterial({ parts: ['Body_metal_cover'], material: '05 CHROME SATIN MIDNIGHT BLACK' })
-
-    // Unlimited3D.getAvailableMaterials((error, result) => { console.log(error, result); })
-    // Unlimited3D.getMaterial({ part: 'Body_metal_base' }, (error, result) => {console.log(error, result)})
-
     // Get the color name
     const [colorName, setColorName] = useState(null)
 
