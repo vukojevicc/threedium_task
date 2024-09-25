@@ -1,28 +1,64 @@
-.color-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 10px;
-    row-gap: 20px;
-    justify-items: center;
-    margin-top: 20px;
+.color {
 
     @media (max-width: $pop-up-breakpoint) {
         display: flex;
         justify-content: center;
-        margin-top: 10px;
-        gap: 18px;
     }
 
-    .option {
-        cursor: pointer;
-        $dimensions: 40px;
-        width: $dimensions;
-        height: $dimensions;
-        border-radius: 50%;
+    .color-options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 10px;
+        row-gap: 15px;
+        justify-items: center;
+        margin-top: 20px;
+        overflow: hidden;
+    
+        @media (max-width: $pop-up-breakpoint) {
+            display: flex;
+            margin-top: 10px;
+            gap: 18px;
+            width: 266px;
+            padding: 5px 0;
+        }
+    
+        .option {
+            cursor: pointer;
+            $dimensions: 40px;
+            min-width: $dimensions;
+            height: $dimensions;
+            border-radius: 50%;
+    
+            &.active {
+                outline: 1px solid black;
+                outline-offset: 2px;
+            }
+        }
+    }
 
-        &.active {
-            outline: 1px solid black;
-            outline-offset: 2px;
+    .color-options-arrows {
+        position: relative;
+
+        .carousel-arrow {
+            position: absolute;
+            width: 30px;
+            cursor: pointer;
+            top: 50%;
+            $translateX: 160%;
+            $translateY: -30%;
+
+            @media (min-width: $pop-up-breakpoint) {
+                display: none;
+            }
+
+            &.right {
+                right: 0;
+                transform: translate($translateX, $translateY);
+            }
+
+            &.left {
+                transform: rotateY(180deg) translate($translateX, $translateY);
+            }
         }
     }
 }
