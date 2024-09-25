@@ -1,4 +1,8 @@
+import useScreenWidthBreakpoint from "../../stores/useScreenWidthBreakpoint"
+
 export default function ConfiguratorOptions({setActiveOption, activeOption}) {
+
+    const screenWidthBreakpoint = useScreenWidthBreakpoint(state => state.screenWidthBreakpoint)
 
     // Uncheck radio button on pressing 'X'
     if (!activeOption) {
@@ -8,34 +12,39 @@ export default function ConfiguratorOptions({setActiveOption, activeOption}) {
         })
     }
 
-    // Utility function to change the camera
-    const changeTheCamera = (camera) => {
-        Unlimited3D.activateModifier({ modifier: `${camera}` }) // Change the camera
+    // Utility function to animate the camera
+    const animateCameraHandler = (camera) => {
+        if (window.innerWidth < screenWidthBreakpoint) {
+            Unlimited3D.activateModifier({ modifier: `camera_${camera}_mobile` })
+        }
+        else {
+            Unlimited3D.activateModifier({ modifier: `camera_${camera}` })
+        }
     }
 
     return (
         <div className="configurator-options">
             <label onClick={() => {
                 setActiveOption('body')
-                changeTheCamera('camera_body')
+                animateCameraHandler('body')
             }}>
                 <input type="radio" name="suitcase-part" value="body" /> Body
             </label>
             <label onClick={() => {
                 setActiveOption('handles')
-                changeTheCamera('camera_handle')
+                animateCameraHandler('handle')
             }}>
                 <input type="radio" name="suitcase-part" value="handles" /> Handles
             </label>
             <label onClick={() => {
                 setActiveOption('corners')
-                changeTheCamera('camera_corners')
+                animateCameraHandler('corners')
             }}>
                 <input type="radio" name="suitcase-part" value="corners" /> Corners
             </label>
             <label onClick={() => {
                 setActiveOption('wheels')
-                changeTheCamera('camera_wheels')
+                animateCameraHandler('wheels')
             }}>
                 <input type="radio" name="suitcase-part" value="wheels" /> Wheels
             </label>

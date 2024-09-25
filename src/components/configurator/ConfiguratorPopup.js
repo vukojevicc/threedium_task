@@ -3,8 +3,21 @@ import BodyColorPart from "./colors-and-parts/BodyColorPart"
 import HandlesColorPart from "./colors-and-parts/HandlesColorPart"
 import CornersColorPart from './colors-and-parts/CornersColorPart'
 import WheelsColorPart from './colors-and-parts/WheelsColorPart'
+import useScreenWidthBreakpoint from "../../stores/useScreenWidthBreakpoint"
 
 export default function ConfiguratorPopup({activeOption, setActiveOption}) {
+
+    const screenWidthBreakpoint = useScreenWidthBreakpoint(state => state.screenWidthBreakpoint)
+
+    // Animate the camera to a default position on pressing 'X'
+    const clickXHandler = () => {
+        if (window.innerWidth < screenWidthBreakpoint) {
+            Unlimited3D.activateModifier({ modifier: "default_camera_mobile" })
+        }
+        else {
+            Unlimited3D.activateModifier({ modifier: "default_camera_desktop" })
+        }
+    }
 
     // Get the color name
     const [colorName, setColorName] = useState(null)
@@ -70,7 +83,7 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
                         </div>
                         <div className="close-button" onClick={() => {
                                 setActiveOption('')
-                                Unlimited3D.activateModifier({ modifier: "default_camera_desktop" }) // set the camera to default
+                                clickXHandler()
                             }}>
                             <img src="./svgs/x-icon.svg" alt="close button"/>
                         </div>

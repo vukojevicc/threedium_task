@@ -9,6 +9,14 @@
     font-size: 14px;
     min-width: 210px;
 
+    @media (max-width: 700px) {
+        bottom: 0;
+        top: unset;
+        transform: unset;
+        right: 0;
+        width: 100%;
+    }
+
     .upper-section {
         display: flex;
         flex-direction: column;

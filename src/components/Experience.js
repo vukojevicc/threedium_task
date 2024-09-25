@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import ConfiguratorElements from "./configurator/ConfiguratorElements";
+import useScreenWidthBreakpoint from "../stores/useScreenWidthBreakpoint";
+import ResponsiveCamera from "./ResponsiveCamera";
+import Unlimited3DConfiguration from "./Unlimited3DConfiguration";
 
 export default function Experience() {
 
     // State used to toggle between configurator and animations modes
     const [configurator, setConfigurator] = useState(true)
+    const screenWidthBreakpoint = useScreenWidthBreakpoint(state => state.screenWidthBreakpoint)
 
     // Toggle annotations
     useEffect(() => {
@@ -18,21 +22,37 @@ export default function Experience() {
               })
         }
         else {
-            Unlimited3D.hideAnnotations({ annotations: ['Open', 'Extend handle', 'Wheel spinner on', 'Close', 'Retract handle', 'Wheel spinner off'] })
-            Unlimited3D.activateModifier({ modifier: "retract_handle" })
-            Unlimited3D.activateModifier({ modifier: "wheel_spinner_off" })
-            Unlimited3D.activateModifier({ modifier: "close" })
+            Unlimited3D.hideAnnotations({ annotations: ['Open', 'Extend handle', 'Wheel spinner on', 'Close', 'Retract handle', 'Wheel spinner off'] }, () => {
+                Unlimited3D.activateModifier({ modifier: "retract_handle" })
+                Unlimited3D.activateModifier({ modifier: "wheel_spinner_off" })
+                Unlimited3D.activateModifier({ modifier: "close" })
+            })
         }
 
-        Unlimited3D.activateModifier({ modifier: "default_camera_desktop" }) // set the camera to default
+        if (window.innerWidth < screenWidthBreakpoint) {
+            // Using this workaround because the modifier doesn't apply in this case for some reason.
+            setTimeout(() => {
+                Unlimited3D.activateModifier({ modifier: "default_camera_mobile" })
+            }, 10)
+        }
+        else {
+            // Using this workaround because the modifier doesn't apply in this case for some reason.
+            setTimeout(() => {
+                Unlimited3D.activateModifier({ modifier: "default_camera_desktop" })
+            }, 10)
+        }
+
     }, [configurator])
 
     return (
         <>
+            <Unlimited3DConfiguration/>
             <div className="main-tab">
                 <button 
                 className={`${configurator ? 'active' : ''}`}
-                onClick={() => {setConfigurator(true)}}
+                onClick={() => {
+                    setConfigurator(true)
+                }}
                 >Configurator</button>
 
                 <button 
@@ -42,6 +62,7 @@ export default function Experience() {
             </div>
 
             {configurator && <ConfiguratorElements/>}
+            <ResponsiveCamera/>
         </>
     )
 }
