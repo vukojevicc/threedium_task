@@ -9,7 +9,7 @@
     font-size: 14px;
     min-width: 210px;
 
-    @media (max-width: 700px) {
+    @media (max-width: $pop-up-breakpoint) {
         bottom: 0;
         top: unset;
         transform: unset;
@@ -66,6 +66,10 @@
         display: flex;
         justify-content: space-between;
         margin-top: 50px;
+
+        @media (max-width: $pop-up-breakpoint) {
+            margin-top: 25px;
+        }    
 
         .right-arrow-parent {
             display: flex;

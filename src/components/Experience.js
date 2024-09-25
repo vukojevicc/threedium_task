@@ -42,6 +42,10 @@ export default function Experience() {
             }, 10)
         }
 
+        // Reset the margin of the root element for mobile devices. This margin is also moved in the ConfiguratorOptions.js on line 29, and in ConfiguratorPopup.js on line 23.
+        const root = document.querySelector('#root')
+        root.style.marginTop = '0'
+
     }, [configurator])
 
     return (

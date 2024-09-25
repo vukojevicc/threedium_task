@@ -22,8 +22,17 @@ export default function ConfiguratorOptions({setActiveOption, activeOption}) {
         }
     }
 
+    // Move the main element up a bit when the configurator pop-up is opened on mobile devices. Resetting the margin is done in the ConfiguratorPopup.js component on line 23, and in
+    // Experience.js on line 48.
+    const moveRootHandler = () => {
+        if (window.innerWidth < 701) {
+            const root = document.querySelector('#root')
+            root.style.marginTop = '-90px'
+        }
+    }
+
     return (
-        <div className="configurator-options">
+        <div className="configurator-options" onClick={moveRootHandler}>
             <label onClick={() => {
                 setActiveOption('body')
                 animateCameraHandler('body')

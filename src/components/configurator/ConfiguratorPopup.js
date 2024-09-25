@@ -9,7 +9,8 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
 
     const screenWidthBreakpoint = useScreenWidthBreakpoint(state => state.screenWidthBreakpoint)
 
-    // Animate the camera to a default position on pressing 'X'
+    // Animate the camera to a default position by pressing 'X' and reset the root margin for mobile devices. This margin is moved in the ConfiguratorOptions.js component on line 29,
+    // and in Experience.js on line 48.
     const clickXHandler = () => {
         if (window.innerWidth < screenWidthBreakpoint) {
             Unlimited3D.activateModifier({ modifier: "default_camera_mobile" })
@@ -17,6 +18,9 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
         else {
             Unlimited3D.activateModifier({ modifier: "default_camera_desktop" })
         }
+
+        const root = document.querySelector('#root')
+        root.style.marginTop = '0'
     }
 
     // Get the color name

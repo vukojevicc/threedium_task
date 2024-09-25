@@ -18,4 +18,16 @@ body {
 
 #root {
     @include width-height-adjusted;
+
+    @media (max-width: $pop-up-breakpoint) {
+        &:has(.configurator-popup) {
+            margin-top: -90px!important;
+        }
+    }
+
+    @media (min-width: $pop-up-breakpoint) {
+        &:has(.configurator-popup) {
+            margin-top: 0!important;
+        }
+    }
 }

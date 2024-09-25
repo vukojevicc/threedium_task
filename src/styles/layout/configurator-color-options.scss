@@ -6,6 +6,12 @@
     justify-items: center;
     margin-top: 20px;
 
+    @media (max-width: $pop-up-breakpoint) {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
     .option {
         cursor: pointer;
         $dimensions: 40px;
