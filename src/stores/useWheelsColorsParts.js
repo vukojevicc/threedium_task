@@ -1,9 +1,7 @@
-import { useEffect } from "react"
-import ColorPart from "./ColorPart"
+import { create } from "zustand"
 
-export default function BodyColorPart({onColorChange, getAllParts, part}) {
-
-    const colors = [
+export default create(() => ({
+    colors: [
         {
             colorName: 'Chrome ALUMINIUM',
             shortColorName: 'aluminum',
@@ -34,9 +32,8 @@ export default function BodyColorPart({onColorChange, getAllParts, part}) {
             shortColorName: 'green',
             backgroundColor: '#727f67'
         }
-    ]
-
-    const parts = [
+    ],
+    parts: [
         {
             partName: 'Wheels_base',
             shortPartName: 'base'
@@ -78,20 +75,4 @@ export default function BodyColorPart({onColorChange, getAllParts, part}) {
             shortPartName: 'back left centar'
         }
     ]
-
-    // Retrieve the initial part and reset the color
-    useEffect(() => {
-        getAllParts(parts)
-        onColorChange(null)
-    }, [])
-
-    return (
-        <>
-            <ColorPart 
-                colors={colors} 
-                onColorChange={onColorChange} 
-                part={part} 
-            />
-        </>
-    )
-}
+}))

@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
-import BodyColorPart from "./colors-and-parts/BodyColorPart"
-import HandlesColorPart from "./colors-and-parts/HandlesColorPart"
-import CornersColorPart from './colors-and-parts/CornersColorPart'
-import WheelsColorPart from './colors-and-parts/WheelsColorPart'
 import useScreenWidthBreakpoint from "../../stores/useScreenWidthBreakpoint"
+import ColorPart from "./ColorPart"
 
 export default function ConfiguratorPopup({activeOption, setActiveOption}) {
 
@@ -98,10 +95,7 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
                         <div className="color-name">{colorName}</div>
                     </div>
                     <div className="color">
-                        {activeOption === 'body' && <BodyColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
-                        {activeOption === 'handles' && <HandlesColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
-                        {activeOption === 'corners' && <CornersColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
-                        {activeOption === 'wheels' && <WheelsColorPart onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>}
+                        <ColorPart activeOption={activeOption} onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>
                     </div>
                 </div>
                 <div className="arrows">
