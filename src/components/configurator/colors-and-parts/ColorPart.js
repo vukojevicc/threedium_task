@@ -11,7 +11,7 @@ export default function ColorPart({ colors, onColorChange, part }) {
         setActiveIndex(null)
     }, [part])
 
-    // Slider
+    // Slider for mobile devices
     const rightArrowHandler = () => {
         colorOptions.current.scrollBy({ left: 200, behavior: 'smooth' })
     }
