@@ -78,7 +78,7 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
 
     useEffect(() => {
         initialColorHandler()
-    }, [partIndex, parts])
+    }, [partIndex, parts, activeOption])
 
     // loop through parts
     const nextPartHandler = () => {
