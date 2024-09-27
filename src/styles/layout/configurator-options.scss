@@ -33,7 +33,10 @@
         }
 
         [type='radio'] {
-            accent-color: black;
+            $accent-color: black;
+            -webkit-accent-color: $accent-color;
+            -moz-accent-color: $accent-color;
+            accent-color: $accent-color;
         }
 
         &:has(:checked) {
