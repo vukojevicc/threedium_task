@@ -5,7 +5,7 @@ import useHandlesColorsParts from "../../stores/useHandlesColorsParts"
 import useWheelsColorsParts from "../../stores/useWheelsColorsParts"
 import useColorDependencies from "../../stores/useColorDependencies"
 
-export default function ColorPart({ onColorChange, part, getAllParts, activeOption }) {
+export default function ColorPart({ onColorChange, part, getAllParts, activeOption, colorName }) {
 
     // Retrieve colors and parts from the Zustand store based on the active configuration option
     let colors, parts
@@ -39,19 +39,11 @@ export default function ColorPart({ onColorChange, part, getAllParts, activeOpti
         parts = wheelsParts
     }
 
-    // Track the active color index to give it the active class
-    const [activeIndex, setActiveIndex] = useState(null)
-
     // Retrieve the initial part and reset the color
     useEffect(() => {
         getAllParts(parts)
         onColorChange(null)
     }, [parts])
-
-    // Remove active color outline on arrow click/part change
-    useEffect(() => {
-        setActiveIndex(null)
-    }, [part])
 
     // Slider for mobile devices
     const colorOptions = useRef()
@@ -110,10 +102,9 @@ export default function ColorPart({ onColorChange, part, getAllParts, activeOpti
                     return (
                     <div 
                         key={index}
-                        className={`option ${activeIndex === index ? 'active' : ''} ${color.shortColorName}`}
+                        className={`option ${color.shortColorName} ${colorName === color.shortColorName ? 'active' : ''}`}
                         style={{backgroundColor: color.backgroundColor}}
                         onClick={() => {
-                            setActiveIndex(index)
                             onColorChange(color.shortColorName)
                             initialColorHandler(color.shortColorName)
                             initialPartHandler(part.partName)

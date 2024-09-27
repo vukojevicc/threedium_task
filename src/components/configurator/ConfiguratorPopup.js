@@ -136,7 +136,13 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
                         <div className="color-name">{colorName}</div>
                     </div>
                     <div className="color">
-                        <ColorPart activeOption={activeOption} onColorChange={colorNameHandler} getAllParts={partsHandler} part={parts && parts[partIndex]}/>
+                        <ColorPart 
+                            activeOption={activeOption} 
+                            onColorChange={colorNameHandler} 
+                            getAllParts={partsHandler} 
+                            part={parts && parts[partIndex]}
+                            colorName={colorName}
+                        />
                     </div>
                 </div>
                 <div className="arrows">
