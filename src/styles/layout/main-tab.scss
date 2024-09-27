@@ -10,7 +10,10 @@
     gap: $gap;
     padding: 0 $gap;
     border-radius: 5px;
-    backdrop-filter: blur(5px);
+    $blur-amount: 5px;
+    -webkit-backdrop-filter: blur($blur-amount);
+    -moz-backdrop-filter: blur($blur-amount);
+    backdrop-filter: blur($blur-amount);
 
     button {
         all: unset;
