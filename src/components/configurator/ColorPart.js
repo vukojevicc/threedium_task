@@ -76,7 +76,7 @@ export default function ColorPart({ onColorChange, part, getAllParts, activeOpti
             setInitialColor(color)
         }
         // Reset the materials back to aluminum
-        if (initialPart === part.partName) {
+        if (initialPart === part.partName && initialColor !== color) {
             Unlimited3D.changeMaterials({ partObjects: [ {parts: ['Corners_base','Corners_cover', 'Handle_base1', 'Handle_metal-1', 'Handle_telescope-1', 'Wheels_base', 'Wheels_base_cover', 'Wheels_front_right_base', 'Wheels_front_left_base', 'Wheels_back_right_base', 'Wheels_back_left_base', 'Wheels_front_right_center', 'Wheels_front_left_center', 'Wheels_back_right_center', 'Wheels_back_left_centar'], material: 'Chrome ALUMINIUM'} ] }, () => {
                 Unlimited3D.changeMaterials({ partObjects: [ {parts: ['Body_metal_base','Body_metal_cover'], material: '06 CHROME SATIN ALUMINUM'} ] }, () => {
                     Unlimited3D.changeMaterial({ parts: [`${initialPart}`], material: `${colors.find(object => object.shortColorName === color).colorName}` })
@@ -110,7 +110,7 @@ export default function ColorPart({ onColorChange, part, getAllParts, activeOpti
                     return (
                     <div 
                         key={index}
-                        className={`option ${activeIndex === index ? 'active' : ''}`}
+                        className={`option ${activeIndex === index ? 'active' : ''} ${color.shortColorName}`}
                         style={{backgroundColor: color.backgroundColor}}
                         onClick={() => {
                             setActiveIndex(index)

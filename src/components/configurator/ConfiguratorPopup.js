@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react"
 import useScreenWidthBreakpoint from "../../stores/useScreenWidthBreakpoint"
 import ColorPart from "./ColorPart"
+import useBodyColorsParts from "../../stores/useBodyColorsParts"
+import useCornersColorsParts from "../../stores/useCornersColorsParts"
+import useHandlesColorsParts from "../../stores/useHandlesColorsParts"
+import useWheelsColorsParts from "../../stores/useWheelsColorsParts"
 
 export default function ConfiguratorPopup({activeOption, setActiveOption}) {
 
     const screenWidthBreakpoint = useScreenWidthBreakpoint(state => state.screenWidthBreakpoint)
+
+    const bodyColors = useBodyColorsParts(state => state.colors)
+    const cornersColors = useCornersColorsParts(state => state.colors)
+    const handlesColors = useHandlesColorsParts(state => state.colors)
+    const wheelsColors = useWheelsColorsParts(state => state.colors)
 
     // Animate the camera to a default position by pressing 'X' and reset the root margin for mobile devices. This margin is moved in the ConfiguratorOptions.js component on line 29,
     // and in Experience.js on line 48.
@@ -37,6 +46,40 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
     // Set the initial part
     const [partIndex, setPartIndex] = useState(0)
 
+    // Get initial color
+    const initialColorHandler = () => {
+        if (parts) {
+            Unlimited3D.getMaterial({ part: `${parts[partIndex].partName}` }, (error, result) => {
+
+                const getColor = (colorSet) => {
+                    colorSet.forEach(color => {
+                        if (color.colorName === result) {
+                            setColorName(color.shortColorName)
+                            return
+                        }
+                    })
+                }
+
+                if (parts[partIndex].partName.includes('Body')) {
+                    getColor(bodyColors)
+                }
+                else if (parts[partIndex].partName.includes('Corners')) {
+                    getColor(cornersColors)
+                }
+                else if (parts[partIndex].partName.includes('Handle')) {
+                    getColor(handlesColors)
+                }
+                else if (parts[partIndex].partName.includes('Wheels')) {
+                    getColor(wheelsColors)
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        initialColorHandler()
+    }, [partIndex, parts])
+
     // loop through parts
     const nextPartHandler = () => {
         setPartIndex(previousPartIndex => {
@@ -48,8 +91,7 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
             return previousPartIndex + 1 
         })
 
-        // Reset color name
-        setColorName(null)
+        initialColorHandler()
     }
 
     const previousPartHandler = () => {
@@ -62,8 +104,7 @@ export default function ConfiguratorPopup({activeOption, setActiveOption}) {
             return previousPartIndex - 1 
         })
 
-        // Reset color name
-        setColorName(null)
+        initialColorHandler()
     }
 
     // Reset part index when the active option is changed
